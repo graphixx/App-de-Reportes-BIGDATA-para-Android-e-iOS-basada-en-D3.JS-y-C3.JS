@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/ionic.min.css" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Registrar Visitante</title>
+	
+<style>
+input{
+-webkit-border-radius: 50px !important;
+-moz-border-radius: 50px !important;
+border-radius: 50px !important;
+background-color : #25a6d9 !important;
+color: #000000 !important;
+}
+
+label {
+  font: italic bold 12px/30px Georgia, serif;
+}
+
+.selectWrapper{
+  border-radius:36px;
+  display:inline-block;
+  overflow:hidden;
+  background:#cccccc;
+  border:1px solid #cccccc;
+}
+.selectBox{
+  width:140px;
+  height:40px;
+  border:0px;
+  outline:none;
+}
+
+.button {border-radius: 12px;}
+
+/* select { width: 5.5em !important} */
+</style>
+<!-- AUTOCOMPLETAR -->
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+$( function() {
+
+ // Single Select
+ $( "#contacto_unitec" ).autocomplete({
+  source: function( request, response ) {
+   // Fetch data
+   $.ajax({
+    url: "http://unitecusa.com.co/temperaturas/sistema_2.0_api/mysql_empleado3.php",
+    type: 'post',
+    dataType: "json",
+    data: {
+     search: request.term
+    },
+    success: function( data ) {
+     response( data );
+    }
+   });
+  },
+  select: function (event, ui) {
+   // Set selection
+   $('#contacto_unitec').val(ui.item.label); // display the selected text
+   //$('#selectuser_id').val(ui.item.value); // save selected id to input
+   return false;
+  }
+ });
+
+});
+function split( val ) {
+   return val.split( /,\s*/ );
+}
+function extractLast( term ) {
+   return split( term ).pop();
+}
+</script>
+<!-- AUTOCOMPLETAR -->
+</head>
+<body>
+    <div class="bar bar-header">
+	<a href="javascript: history.go(-1)" class="button button-clear">&lt; Atras</a>
+        <h1 class="title">Registrar Empleado</h1>
+    </div>
+    <div class="padding" style="margin-top:30px;">
+	
+		<label class="item-input">
+		    <span class="input-label">Nombre Empleado</span>
+			<input type="text" id="contacto_unitec" style="text-transform:uppercase"><br/>
+        </label>
+		
+		<label class="item-input">
+		    <span class="input-label">Temperatura</span>
+		    <input type="number" id="temperatura" style="text-transform:uppercase"><br/>
+        </label>
+		
+		<label class="item-input">
+		    <span class="input-label">Observaciones</span>
+			<textarea id="observaciones" name="observaciones" rows="4" cols="50" style="text-transform:uppercase"></textarea><br/>		
+        </label>
+		
+		</label>
+        <label class="item-input">
+            <button class="button button-block button-positive" id="empleados">Registrar Empleado</button>
+        </label>
+  		<label class="item-input">
+		<input type="hidden" placeholder="lat" id="latitud">
+		</label>
+		<label class="item-input">
+		<input type="hidden" placeholder="long" id="longitud">
+		<p id="demo"></p>
+		</label>      
+      
+    </div>
+	
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Se registrara tu ingreso...</h4>
+        </div>
+        <div class="modal-body">
+          <img src="img/security.gif" width="300" height="300">
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+	
+    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="js/jq.js"></script>-->
+    <script type="text/javascript" src="js/auth.js"></script>
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocalización no es soportada por tu dispositivo.";
+  }
+}
+
+function showPosition(position) {
+  /* x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude; */
+  document.getElementById("latitud").value = position.coords.latitude;
+  document.getElementById("longitud").value = position.coords.longitude;
+}
+
+(function() {
+  navigator.geolocation.getCurrentPosition(showPosition);
+})();
+</script>
+</body>
+</html>

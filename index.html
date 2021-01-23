@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/ionic.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/ionicons.min.css" />
+    <title>Inicio</title>
+    <script type="text/javascript">
+    var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+    if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body style="background: url('img/fondo.jpeg');background-repeat:no-repeat;">
+    <div class="bar bar-header">
+        <h1 class="title">Mi Perfil</h1>
+        <a href="#" class="button button-clear" id="logout">Salir</a>
+    </div>
+    <div style="height:100px;text-align:center;margin-top:44px;padding:20px;">
+        <img src="" id="profilepic" style="padding:5px;border:1px solid #ADABAB;border-radius:50px;height:75px;width:75px;" />
+        <h5 id="name" style="color:#fff;"></h5>
+    </div>
+	<!--<br/><br/><br/>--><br/><br/><br/><br/><br/><br/>
+    <ul class="list list-inset">
+        <li class="item" style="color:#D26F6F;">Email
+            <p class="item-note" id="email1"></p><br>
+			<p class="item-note" id="fullname"></p>
+        </li>
+        <a href="change-password.html" class="item item-icon-right">Cambiar Contraseña <i class="icon ion-ios-arrow-right"></i></a>
+		<a href="reporte.html" class="item item-icon-right">Reporte Ejecutivo Barras<i class="icon ion-ios-arrow-right"></i></a>
+		<!--<a href="reporte2.html" class="item item-icon-right">Reporte Ejecutivo Torta<i class="icon ion-ios-arrow-right"></i></a>-->
+		<a href="reporte3.html" class="item item-icon-right">Reporte Ejecutivo Lineas<i class="icon ion-ios-arrow-right"></i></a>
+		<a href="#" onclick="window.open('https://www.sistemasycontroles.com/app_reportes_demo/admin/', '_system'); return false;" class="item item-icon-right">Admin Valores Reporte<i class="icon ion-ios-arrow-right"></i></a>
+		<!--<a href="empleado.html" class="item item-icon-right">Registrar Empleado <i class="icon ion-ios-arrow-right"></i></a>
+		<a href="visitante.html" class="item item-icon-right">Registrar Visitante <i class="icon ion-ios-arrow-right"></i></a>
+		<a href="#" onclick="window.open('http://unitecusa.com.co/temperaturas/_app_read/admin/_datagrid/visitantes.php?key=raizPeraHouseBiciu5dAbpFTfE5r', '_system'); return false;" style="color:#FFFFFF;">
+		<button class="button button2">Ver Visitantes</button></a>
+        <button class="button button2">Ver Empleados</button>-->
+		
+		<!--<a href="mapa.html" class="item item-icon-right">MAPA de Rastreo de Repartidor <i class="icon ion-ios-arrow-right"></i></a>-->
+		<!--<a href="chat.html" class="item item-icon-right">CHAT <i class="icon ion-ios-arrow-right"></i></a>-->
+		<!--<a href="gps.html" class="item item-icon-right">GPS <i class="icon ion-ios-arrow-right"></i></a>-->
+    </ul>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jq.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>
+<script type="text/javascript">
+	document.addEventListener("deviceready", onDeviceReady, false);
+	
+	function onDeviceReady() {
+	
+    //checkGPS(); //graphixx 2020_07_06
+	//initBackgroundTracking();
+	//navigator.geolocation.watchPosition();
+	//timeout: 1000, enableHighAccuracy : getLocationAccuracy();
+	//cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY;
+	//timeout: 10000, enableHighAccuracy : true;
+	
+	}
+
+function onRequestSuccess(success){
+    //alert("Successfully requested accuracy: "+success.message);
+    //getCurrentPosition();
+}
+
+function onRequestFailure(error){
+    //alert("Accuracy request failed: error code="+error.code+"; error message="+error.message);    
+    if(error.code == 4){
+    	//toastMsg( getTrans("You have choosen not to turn on location accuracy",'turn_off_location') );
+    	//checkGPS(); //graphixx 2020_07_06
+    } else {
+    	//toastMsg( error.message );
+    }
+}
+
+function getLocationAccuracy()
+{
+	//var location_accuracy = getStorage("kr_location_accuracy");
+	var location_accuracy = "";
+	if(!empty(location_accuracy)){
+		if ( location_accuracy == 1){
+			return true;
+		}
+	}
+	return false;
+}
+
+var xx=0;
+var lastUpdateTime,
+minFrequency = 8000;
+
+function getCurrentPosition()
+{	 
+	 watchID = navigator.geolocation.watchPosition( function(position) {
+	 //navigator.geolocation.getCurrentPosition( function(position) {	 
+	 
+	     var now = new Date();
+	     
+	     dump( position.coords.latitude);	 
+	     dump(  position.coords.longitude );	   
+	     
+	     var now = new Date();
+
+	     //toastMsg(app_running_status);	     
+	     /* if(!empty(app_running_status)){
+		     if (app_running_status=="background"){
+		     	 return;
+		     }
+	     } */
+	     	     	    
+	     /* app_track_interval = getStorage("app_track_interval");
+	     if (!empty(app_track_interval)){
+	     	 minFrequency=app_track_interval;
+	     }	*/     	     	     	     
+	     
+	     /*if(!empty(lastUpdateTime)){	     	 
+	     	 var freq_time = now.getTime() - lastUpdateTime.getTime();	 
+	     	 if ( freq_time <  minFrequency ) {
+	     	 	 dump("Ignoring position update");
+	     	 	 return ;
+	     	 }
+	     }
+	     lastUpdateTime = now;	  */	     	     
+	     //$(".watch-id").html( xx++ );	     
+	     
+	     /*params = 'lat='+ position.coords.latitude + "&lng=" + position.coords.longitude;
+	     params+="&app_version="+ app_version;
+	     
+	     params+="&altitude="+ position.coords.altitude;
+	     params+="&accuracy="+ position.coords.accuracy;
+	     params+="&altitudeAccuracy="+ position.coords.altitudeAccuracy;
+	     params+="&heading="+ position.coords.heading;
+	     params+="&speed="+ position.coords.speed;
+	     params+="&track_type=active";
+	     
+	     
+	     callAjax2('updateDriverLocation', params); */
+	     
+	 },function(error) {
+	 	 dump('error position');
+	 	 navigator.geolocation.clearWatch(watchID);
+	 },
+	   { timeout: 10000, enableHighAccuracy : true } 
+	 );	 	 
+}
+
+function checkGPS()
+{				
+	 /* if (isDebug()){
+		return ;
+	 } */
+	 	  	
+	 	cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+		    switch(status){
+		        case "NOT_REQUESTED":
+		            //toastMsg( getTrans("Permission not requested",'permission_not_requested') );
+		            //return;
+		            break;
+		        case "GRANTED":
+		            //toastMsg("Permission granted");
+		            
+		            //cordova.plugins.locationAccuracy.request( onRequestSuccess, 
+	                //onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+					
+					cordova.plugins.locationAccuracy.request( onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+		            
+		            break;
+		        case "DENIED":
+		            //toastMsg( getTrans("Permission denied",'permission_denied') );
+		            //return;
+		            break;
+		        case "DENIED_ALWAYS":
+		            //toastMsg( getTrans("Permission permanently denied",'permission_permanently_denied') );
+		            //return;
+		            break;
+		    }
+		}, function(error){
+		    //toastMsg(error);
+		    //return;
+		});	
+	 
+}
+
+initBackgroundTracking = function(){
+	
+	try {
+			
+		var app_disabled_bg_tracking=getStorage("app_disabled_bg_tracking");
+		if (app_disabled_bg_tracking==1 || app_disabled_bg_tracking=="1"){		
+			return;
+		}		
+		
+		var min_frequency = getStorage("app_track_interval");		
+		if (min_frequency<=0){
+			min_frequency=8000;
+		}
+		if (empty(min_frequency)){
+			min_frequency=8000;
+		}
+		
+		//alert("min_frequency=>"+min_frequency);
+		
+		 BackgroundGeolocation.configure({
+		    locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,	    
+		    //locationProvider: BackgroundGeolocation.DISTANCE_FILTER_PROVIDER,	    
+		    desiredAccuracy: BackgroundGeolocation.MEDIUM_ACCURACY,
+		    stationaryRadius: 1,
+		    distanceFilter: 1,
+		    notificationTitle: getTrans("Tracking","tracking") +  "..." ,
+		    notificationText: '',	    
+		    interval: min_frequency,
+		    fastestInterval: min_frequency,
+		    activitiesInterval: min_frequency,
+		    stopOnTerminate: true,
+		    stopOnStillActivity: false ,
+		    debug: false, 
+		});
+		
+		BackgroundGeolocation.on('start', function() {
+		    //toastMsg('[INFO] BackgroundGeolocation service has been started');
+		    setStorage("bg_tracking",1);
+		    navigator.geolocation.clearWatch(watchID);
+		});
+		
+		BackgroundGeolocation.on('stop', function() {
+	       //toastMsg('[INFO] BackgroundGeolocation service has been stopped');
+	    });
+		
+		BackgroundGeolocation.on('error', function(error) {
+	       toastMsg('[ERROR] BackgroundGeolocation error:', error.code, error.message);
+	    });
+	    
+	    BackgroundGeolocation.on('location', function(location) {    
+		    BackgroundGeolocation.startTask(function(taskKey) {	      	      		      	
+		    	
+		    	 params = 'lat='+ location.latitude + "&lng=" + location.longitude + "&app_version=" + app_version;		
+				 params+="&altitude="+ '';
+			     params+="&accuracy="+ location.accuracy;
+			     params+="&altitudeAccuracy="+ '';
+			     params+="&heading="+ '';
+			     params+="&speed="+ '';
+			     params+="&track_type=background";
+			    	 
+			     callAjax2('updateDriverLocation', params);
+			     
+		         BackgroundGeolocation.endTask(taskKey);
+		    });
+	    });
+	    
+	    BackgroundGeolocation.on('stationary', function(stationaryLocation) {
+	     	/*toastMsg('[INFO] App is in stationary');
+	     	toastMsg(JSON.stringify(stationaryLocation));*/
+	    });
+	    
+	    BackgroundGeolocation.on('background', function() {
+		    //toastMsg('[INFO] App is in background');			  
+		    BackgroundGeolocation.checkStatus(function(status) {
+		    	if (!status.isRunning) {		    				    			    		
+		    		setTimeout(function() {	    	   
+			    	   BackgroundGeolocation.start();  
+			    	}, 100);
+		    	}
+		    });		    
+	    });
+    
+	    BackgroundGeolocation.on('foreground', function() {	    		    	
+	    	BackgroundGeolocation.checkStatus(function(status) {
+	    		if (status.isRunning) {
+	    			setTimeout(function() {	    	   
+			    	   BackgroundGeolocation.stop();	    	
+			    	}, 100);
+	    		}
+	    	});		    	
+	    });
+	   
+	    BackgroundGeolocation.on('authorization', function(status) {
+		    console.log('[INFO] BackgroundGeolocation authorization status: ' + status);
+		    if (status !== BackgroundGeolocation.AUTHORIZED) {
+		      // we need to set delay or otherwise alert may not be shown
+		      setTimeout(function() {
+		        var showSettings = confirm('App requires location tracking permission. Would you like to open app settings?');
+		        if (showSetting) {
+		          return BackgroundGeolocation.showAppSettings();
+		        }
+		      }, 1000);
+		    }
+		});
+		
+		
+  
+    } catch(err) {
+       alert(err.message);   
+    }  
+};
+</script>
+</body>
+
+</html>

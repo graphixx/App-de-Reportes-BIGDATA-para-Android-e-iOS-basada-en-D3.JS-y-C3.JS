@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/ionic.min.css" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Registrar Visitante</title>
+	
+<style>
+input{
+-webkit-border-radius: 50px !important;
+-moz-border-radius: 50px !important;
+border-radius: 50px !important;
+background-color : #25a6d9 !important;
+color: #000000 !important;
+}
+
+label {
+  font: italic bold 12px/30px Georgia, serif;
+}
+
+.selectWrapper{
+  border-radius:36px;
+  display:inline-block;
+  overflow:hidden;
+  background:#cccccc;
+  border:1px solid #cccccc;
+}
+.selectBox{
+  width:140px;
+  height:40px;
+  border:0px;
+  outline:none;
+}
+
+.button {border-radius: 12px;}
+
+/* select { width: 5.5em !important} */
+</style>
+
+<!-- Load c3.css -->
+<link href="c3-0.6.7/c3.css" rel="stylesheet">
+
+<!-- Load d3.js and c3.js -->
+<script src="d3/d3.min.js" charset="utf-8"></script>
+<script src="c3-0.6.7/c3.min.js"></script>
+</head>
+<body>
+    <div class="bar bar-header">
+	<a href="javascript: history.go(-1)" class="button button-clear">&lt; Atras</a>
+        <h1 class="title">Reporte Ejecutivo</h1>
+    </div>
+    <div class="padding" style="margin-top:30px;">
+	
+<div id="chart"></div>
+<script>
+var chart = c3.generate({
+    data: {
+        url: 'https://www.citapp.co/reportes_bigdata/CSVEditor/csv/transito.csv',
+        type: 'pie'
+    }
+});
+
+/* var chart = c3.generate({
+    data: {
+        columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 50, 20, 10, 40, 15, 25]
+        ],
+        types: {
+            data1: 'bar',
+        }
+    },
+    axis: {
+        rotated: true
+    }
+}); */
+</script> 
+
+<button class="button button-block button-positive" onClick="window.location.reload();">Actualizar Reporte</button><br/>      
+</div>
+	
+    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="js/jq.js"></script>-->
+    <script type="text/javascript" src="js/auth.js"></script>
+</body>
+</html>
